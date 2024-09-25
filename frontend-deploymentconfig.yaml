@@ -1,0 +1,22 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: chandray/mern-docker-compose-frontend:latest
+          ports:
+            - containerPort: 5173
+          env:
+            - name: REACT_APP_API_URL
+              #value: "http://backend:5050"
+              value: "http://backend-route-chanday-dev.apps.sandbox-m3.1530.p1.openshiftapps.com"
